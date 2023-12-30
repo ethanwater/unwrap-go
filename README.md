@@ -1,5 +1,5 @@
 # unwrap
-A cursed Go library inspired by the std:Result library in Rust. 
+A forbidden Go library inspired by the std:Result library in Rust. 
 
 **Please note** that this should absolutely **not** be used in any production code. If you plan to do so, then I 
 highly advise creating your own custom methods for your error handling. This library directly goes against
