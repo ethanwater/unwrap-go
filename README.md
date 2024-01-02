@@ -1,9 +1,9 @@
 # unwrap
 A forbidden Go library inspired by the std:Result library in Rust. Dont sue me!
 
-**Please note** that this should absolutely **not** be used in any production code. If you plan to do so, then I 
-highly advise creating your own custom methods for your error handling. This library directly goes against
-the Golang philosophy of directly handling errors
+**Please note** that this should absolutely **not** be used in to replace error handling in go. If you plan to do so, then I 
+highly advise creating your own custom methods for your own desired way of handling things. This library *kinda* goes against
+the Golang philosophy of directly handling errors:
 
 > "The philosophy regarding errors is centered around simplicity, explicitness, and ease of handling. Go
 > emphasizes the principle that errors should be explicitly handled rather than 
