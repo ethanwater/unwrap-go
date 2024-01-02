@@ -26,7 +26,7 @@ to fail or return an error, the program will panic.
 But what if we wanted to be a bit *safer*?
 ```go
 func main() {
-  listener := unwrap.Raw(net.Listen("tcp", ":80")).Or(someDefaultListener)
+  listener := unwrap.Wrap(net.Listen("tcp", ":80")).Or(someDefaultListener)
 
   ...
 }
@@ -45,7 +45,7 @@ the default value provided will be returned. If it doesn't fail, than the origin
 Okay, thats great and all but what if you wanted to return a custom error message?
 ```go
 func main() {
-  listener := unwrap.Raw(net.Listen("tcp", ":80")).Expect("whelp, we broke the system")
+  listener := unwrap.Wrap(net.Listen("tcp", ":80")).Expect("whelp, we broke the system")
 
   ...
 }
@@ -64,4 +64,4 @@ I take it back, this is the most cursed function by far. The ```Unchecked``` met
 whether it is valid or not. Basically, the epitome of a YOLO function or saying "It just works"
 
 ## Reference
-Rust Unwrap -> https://doc.rust-lang.org/std/option/enum.Option.html#method.unwrap
+Rust std::result -> https://doc.rust-lang.org/std/result/enum.Result.html
