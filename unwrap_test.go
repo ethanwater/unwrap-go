@@ -2,6 +2,7 @@ package unwrap
 
 import (
 	"testing"
+	"errors"
 )
 
 func TestUnwrap(t *testing.T) {
@@ -97,7 +98,7 @@ func TestExpectErr(t *testing.T) {
 
 func divide(a, b int) (int, error) {
 	if b == 0 {
-		return 0, "error"
+		return 0, errors.New("division failure")
 	}
 	return a / b, nil
 }
