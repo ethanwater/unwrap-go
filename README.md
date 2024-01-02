@@ -9,6 +9,28 @@ the Golang philosophy of directly handling errors:
 > emphasizes the principle that errors should be explicitly handled rather than 
 ignored or concealed." *- GPT3*
 
+This:
+```go
+func main() {
+  listener := unwrap.Wrap(net.Listen("tcp", ":80")).Expect("whoops")
+  handler := http.NewServeMux()
+
+  http.Serve(listener, handle)
+}
+```
+Instead of This:
+```go
+func main() {
+  listener, err := net.Listen("tcp", ":80")
+  if err != nil {
+   panic(fmt.Sprintf("%v", err))
+  }
+  handler := http.NewServeMux()
+
+  http.Serve(listener, handle)
+}
+```
+
 ## The Good Stuff
 Let's start with the most cursed of all, the basic unwrap:
 ```go
@@ -31,7 +53,7 @@ func main() {
   ...
 }
 ```
-The ```Raw``` method wraps the returned (value, error) pair into a struct called ```Result``` returning a "raw" set of values:
+The ```Wrap``` method wraps the returned (value, error) pair into a struct called ```Result``` returning a "wrapped" set of values:
 ```go
 type Result[T any] struct {
 	Value T
