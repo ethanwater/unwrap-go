@@ -1,43 +1,35 @@
 package unwrap
 
 import (
-	"testing"
 	"errors"
+	"testing"
 )
 
 func TestUnwrap(t *testing.T) {
-	//testcase1
 	testcase1 := Unwrap(divide(4, 2))
 	if testcase1 != 2 {
 		t.Errorf("expected: %v, got: %v", 2, testcase1)
 	}
-
-	//testcase2
-	testcase2 := Wrap(divide(4,2)).Unwrap()
+	testcase2 := Wrap(divide(4, 2)).Unwrap()
 	if testcase2 != 2 {
 		t.Errorf("expected: %v, got: %v", 2, testcase2)
 	}
 }
 
 func TestUnwrapErr(t *testing.T) {
-	//testcase1
 	if UnwrapErr(divide(4, 0)) == nil {
 		t.Errorf("failed")
 	}
-
-	//testcase2
-	if Wrap(divide(4,0)).UnwrapErr() == nil {
+	if Wrap(divide(4, 0)).UnwrapErr() == nil {
 		t.Errorf("failed")
 	}
 }
 
 func TestUnwrapErrUnchecked(t *testing.T) {
-	//testcase1
-	if UnwrapErrUnchecked(divide(4,0)) == nil {
+	if UnwrapErrUnchecked(divide(4, 0)) == nil {
 		t.Errorf("failed")
 	}
-	//testcase2
-	if Wrap(divide(4,0)).UnwrapErrUnchecked() == nil {
+	if Wrap(divide(4, 0)).UnwrapErrUnchecked() == nil {
 		t.Errorf("failed")
 	}
 }
@@ -49,20 +41,24 @@ func TestUnwrapOr(t *testing.T) {
 	}
 }
 
-//TODO: Fix this 
-//func TestUnwrapOrElse(t *testing.T) {
-//	var alternativeFunc func(int) int
-//	alternativeFunc = func(x int) int {
-//		return x^2
-//	}
-//
-//	result := Wrap(divide(4,0)).UnwrapOrElse(alternativeFunc)
-//
-//
-//}
+// This test sucks, fix this. or fix the func
+func TestUnwrapOrElse(t *testing.T) {
+	errorTestFunc := func(x int) (int, error) {
+		return x, errors.ErrUnsupported
+	}
+
+	alternativeFunc := func(x int) int {
+		return x * x
+	}
+
+	result := Wrap(errorTestFunc(4)).UnwrapOrElse(alternativeFunc)
+	if result != 16 {
+		t.Errorf("Expected %d, got %d", 16, result)
+	}
+}
 
 func TestUnwrapOrDefault(t *testing.T) {
-	result := Wrap(divide(4,0)).UnwrapOrDefault()
+	result := Wrap(divide(4, 0)).UnwrapOrDefault()
 	if result != 0 {
 		t.Errorf("Expected %d, got %d", 2, result)
 	}
@@ -90,7 +86,7 @@ func TestExpect(t *testing.T) {
 }
 
 func TestExpectErr(t *testing.T) {
-	result := Wrap(divide(4,0)).ExpectErr("uh oh")
+	result := Wrap(divide(4, 0)).ExpectErr("uh oh")
 	if result == nil {
 		t.Errorf("failed")
 	}
