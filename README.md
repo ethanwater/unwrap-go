@@ -1,6 +1,4 @@
-# unwrap
-A forbidden Go library inspired by the std:Result library in Rust. Dont sue me!
-![Alt text](assets/cursedgo.png "cursed golang")
+# unwrap.go
 
 **Please note** that this should absolutely **not** be used in to replace error handling in go. If you plan to do so, then I 
 highly advise creating your own custom methods for your own desired way of handling things. This library *kinda* goes against
